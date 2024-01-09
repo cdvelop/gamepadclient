@@ -1,10 +1,11 @@
 package gamepadclient
 
-import "syscall/js"
+import (
+	"github.com/cdvelop/model"
+)
 
 type gamepadClient struct {
-	gamepads js.Value
-	gamepad  js.Value
+	model.Logger
 
-	previousButtonState []bool
+	*model.GamepadConfig
 }
