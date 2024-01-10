@@ -9,8 +9,10 @@ func AddGamePadHandler() *gamepadClient {
 	if gamepad == nil {
 
 		gamepad = &gamepadClient{
-			connected:     false,
-			GamepadConfig: &GamepadConfig{},
+			connected:            false,
+			notifyConnection:     nil,
+			pressAnyButton:       nil,
+			pressSpecificButtons: nil,
 		}
 
 		js.Global().Set("gamepadButtonHandler", js.FuncOf(gamepad.gamepadButtonHandler))

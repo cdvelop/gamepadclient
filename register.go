@@ -1,16 +1,16 @@
 package gamepadclient
 
-func (g *gamepadClient) GamepadClientNotifyRegister(gamepadConfig any) {
+func (g *gamepadClient) NotifyRegister(c notifyConnection, a pressAnyButton, s pressSpecificButtons) {
 	// g.Log("registrando función botón")
 
-	if config, ok := gamepadConfig.(*GamepadConfig); ok {
+	g.notifyConnection = c
 
-		g.GamepadConfig = config
+	g.pressAnyButton = a
 
-		if g.connected && config.Connected != nil {
-			config.Connected()
-		}
+	g.pressSpecificButtons = s
 
+	if g.connected && g.notifyConnection != nil {
+		g.GamepadConnected()
 	}
 
 }
