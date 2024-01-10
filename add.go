@@ -1,18 +1,21 @@
 package gamepadclient
 
-import (
-	"github.com/cdvelop/model"
-)
+import "syscall/js"
 
 var gamepad *gamepadClient
 
-func AddGamePadHandler(l model.Logger) (g *gamepadClient) {
+func AddGamePadHandler() *gamepadClient {
 
 	if gamepad == nil {
 
 		gamepad = &gamepadClient{
-			Logger: l,
+			connected:     false,
+			GamepadConfig: &GamepadConfig{},
 		}
+
+		js.Global().Set("gamepadButtonHandler", js.FuncOf(gamepad.gamepadButtonHandler))
+		js.Global().Get("window").Call("addEventListener", "gamepadconnected", js.FuncOf(gamepad.Connected))
+		js.Global().Get("window").Call("addEventListener", "gamepaddisconnected", js.FuncOf(gamepad.Disconnected))
 
 	}
 

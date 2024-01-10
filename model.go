@@ -1,11 +1,14 @@
 package gamepadclient
 
-import (
-	"github.com/cdvelop/model"
-)
-
 type gamepadClient struct {
-	model.Logger
+	connected bool
 
-	*model.GamepadConfig
+	*GamepadConfig
+}
+
+type GamepadConfig struct {
+	Connected      func()         //  al conectar gamepad
+	Disconnected   func()         //  al desconectar gamepad
+	ButtonAny      func()         //  al presionar cualquier botón
+	ButtonSpecific map[int]func() // función a ejecutar según numero de botón especifico
 }
