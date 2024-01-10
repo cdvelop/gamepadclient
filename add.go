@@ -25,10 +25,10 @@ func AddGamePadHandler(l model.Logger) (g *gamepadClient) {
 	return gamepad
 }
 
-func (g *gamepadClient) connected(this js.Value, p []js.Value) interface{} {
+func (g gamepadClient) connected(this js.Value, p []js.Value) interface{} {
 	// g.gamepad = p[0].Get("gamepad")
-
-	g.Log("Gamepad connected", p[0].Get("gamepad"))
+	// g.Log("Gamepad connected", p[0].Get("gamepad"))
+	// g.Log("Gamepad connected")
 
 	if g.GamepadConfig != nil && g.GamepadConfig.Connected != nil {
 		g.GamepadConfig.Connected()
@@ -37,9 +37,8 @@ func (g *gamepadClient) connected(this js.Value, p []js.Value) interface{} {
 	return nil
 }
 
-func (g *gamepadClient) disconnected(this js.Value, p []js.Value) interface{} {
-	g.Log("Gamepad disconnected")
-
+func (g gamepadClient) disconnected(this js.Value, p []js.Value) interface{} {
+	// g.Log("Gamepad disconnected")
 	if g.GamepadConfig != nil && g.GamepadConfig.Disconnected != nil {
 		g.GamepadConfig.Disconnected()
 	}
